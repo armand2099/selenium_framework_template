@@ -1,6 +1,13 @@
 # caches
---pycache--
+__pycache__
 .pytest-caches
 
 # Virtual environemnt
 venv
+
+#VS Code files
+.vscode
+
+#Report files
+reports/screenshots/*.png
+reports/*.html

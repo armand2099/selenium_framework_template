@@ -1,28 +1,16 @@
-import time
-import pytest_html
-from common.common_functions import Common, Rest
-
+from pages.login_page import LoginPage
 # Constants declaration
 #Main test URL
-URL = "https://www.google.com"
+URL = "https://demo.applitools.com/"
 #API test URL
 API_URL = "https://api.duckduckgo.com/"
 
-def test_navigate(browser, extras):
+def test_login(browser):
     browser.get(URL)
-    common = Common(browser)
-    
+    login_page = LoginPage(browser)
 
-    print(f"Page title: {common.get_page_title()}")
-    print(f"Page URL: {common.get_page_url()}")
-    common.log("Page Opened", extras)
-    #time.sleep(1)
+    login_page.enter_username()
+    login_page.enter_password()
+    login_page.click_sigin()
 
-def test_api(browser, extras):
-    rest = Rest(API_URL)
-    browser.get(API_URL)
-    common = Common(browser)
-
-    response = rest.rest_get("Selenium")
-
-    common.log(f"Response: {response}", extras)
+    assert login_page.get_page_title() == "ACME demo app"
