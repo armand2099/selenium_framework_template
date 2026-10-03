@@ -1,4 +1,4 @@
-import utils.logging as log
+from utils.logging import Loggin
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -17,7 +17,7 @@ class BasePage:
         The url parameter can be overide
         '''
         self.browser = browser
-        self.wait = WebDriverWait(self.browser, 10) 
+        self.wait = WebDriverWait(self.browser, 10)
 
     def get_page_title(self) -> str:
         '''
@@ -34,6 +34,8 @@ class BasePage:
         '''
         page_url = self.browser.current_url
 
+        print(f"Current page URL: {page_url}")
+
         return page_url
 
     def test_explicit_waits(self) -> None:
@@ -47,6 +49,9 @@ class BasePage:
         finally:
             log.logging(element[0].text)
 
-    def click_element(self, locator: tuple) -> None:        
+    def click_element(self, locator: tuple) -> None:
+        '''
+        Clicks on an element
+        '''
         element = self.wait.until(EC.element_to_be_clickable(locator))
         element.click()

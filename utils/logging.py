@@ -27,19 +27,23 @@ class Loggin:
     def log(self, message: str) -> None:
         '''
         Sends message to the report file and console.
-        Takes an screenshot of the current actual browser
+        Takes a screenshot of the current browser when report extras are enabled.
         '''
         logger = logging.getLogger(__name__)
-        
+
+        # pytest captures this logger for both the report and console output.
         logger.info(message, stacklevel=2)
-        print(message)
-        
+
         if self.extras is not None:
-            self.extras.append(
-                pytest_html.extras.image(
-                    #self.browser.get_screenshot_as_base64(),
-                    self.take_screenshot(),
-                    mime_type="image/png",
-                    name="Screenshot",
+            try:
+                screenshot = self.take_screenshot()
+            except Exception as error:
+                logger.warning(f"Unable to attach screenshot: {error}", stacklevel=2)
+            else:
+                self.extras.append(
+                    pytest_html.extras.image(
+                        screenshot,
+                        mime_type="image/png",
+                        name="Screenshot",
+                    )
                 )
-            )
