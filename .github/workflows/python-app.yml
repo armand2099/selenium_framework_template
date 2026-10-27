@@ -33,7 +33,7 @@ jobs:
         pip install pytest-xdist
     - name: Test with pytest and Chrome
       run: |
-        py -m pytest -n 3 -v -s tests -m "not AUTH"
+        python -m pytest -n 3 -v -s tests -m "not AUTH"
     - name: Test with pytest and Firefox
       run: |
-        py -m pytest --browser-type=Firefox -n 3 -v -s tests -m "not AUTH"
+        python -m pytest --browser-type=Firefox -n 3 -v -s tests -m "not AUTH"
