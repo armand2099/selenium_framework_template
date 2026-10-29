@@ -1,4 +1,3 @@
-from selenium.webdriver import Chrome
 from tests.base_page import BasePage
 from pages.login_page_locators import PageLocators
 
@@ -11,7 +10,7 @@ class LoginPage(BasePage):
     USERNAME = "Jack"
     PASSWORD = "password"
 
-    def __init__(self, browser: Chrome):
+    def __init__(self, browser):
         '''
         Initialize LoginPage class
         '''
@@ -27,24 +26,21 @@ class LoginPage(BasePage):
         '''
         Fills Login page Username textbox
         '''
-        self.browser.find_element(*self.locators.USERNAME).send_keys(username)
+        self.fills_element(self.locators.USERNAME, username)
+        #self.browser.find_element(*self.locators.USERNAME).send_keys(username)
 
     def enter_password(self, password = PASSWORD):
         '''
         Fills Login page Password textbox
         '''
-        self.browser.find_element(*self.locators.PASSWORD).send_keys(password)
+        self.fills_element(self.locators.PASSWORD, password)
+        #self.browser.find_element(*self.locators.PASSWORD).send_keys(password)
 
     def check_remember_box(self):
         '''
         Checks the Remember Me Box
         '''
-        remember_box = self.browser.find_element(*self.locators.REMEMBER_BOX)
-
-        if not remember_box.is_selected():
-            remember_box.click()
-
-        print(f"Checkbox {remember_box.accessible_name} checked")
+        self.check_element(self.locators.REMEMBER_BOX)
 
     def click_sigin(self):
         '''
