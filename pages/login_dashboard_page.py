@@ -1,4 +1,4 @@
-from tests.base_page import BasePage
+from pages.base_page import BasePage
 from pages.login_dashboard_page_locators import PageLocators
 
 
@@ -17,3 +17,5 @@ class LoginDashboardPage(BasePage):
         self.browser = browser
         #Initialize Login PageLocators class
         self.locators = PageLocators()
+        #Initialize Page Elements
+        self.loggedUserName = self.get_element(self.locators.LOGGEDUSERNAME)

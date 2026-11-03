@@ -1,3 +1,5 @@
+import random
+import time
 from utils.logger import Loggin
 from selenium.webdriver import Chrome, Firefox
 from selenium.webdriver.common.by import By
@@ -67,6 +69,10 @@ class BasePage:
         '''
         element = self.get_element(locator)
         element.send_keys(text)
+        if element.get_property("value") == text:
+            print(f"Text | {text} | entered in: {locator[1]}")
+        else:
+            print(f"Failed to enter | {text} | in: {locator[1]}")
 
     
 
@@ -81,3 +87,11 @@ class BasePage:
             print(f"Element {locator[1]} cheked")
         else:
             print(f"Element {locator[1]} is already cheked")
+
+    def random_wait(self) -> int:
+        '''
+        Random wait between 300ms and 3000ms to simulate human behavior
+        '''
+        delay_ms = random.randint(300, 3000)
+        time.sleep(delay_ms / 1000)
+        return delay_ms

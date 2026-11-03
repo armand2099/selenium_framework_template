@@ -32,6 +32,6 @@ def test_login(login_page, logger, browser):
     login_page.click_sigin()
 
     login_dashboard_page = LoginDashboardPage(browser);
-    assert login_dashboard_page.get_element(login_dashboard_page.locators.LOGGEDUSERNAME).text == "Jack Gomez"
+    assert login_dashboard_page.loggedUserName.text == "Jack Gomez"
 
     logger.log(f"Test |{__name__}| passed")

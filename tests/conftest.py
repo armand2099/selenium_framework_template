@@ -1,6 +1,7 @@
 import pytest
 import os
 import json
+from typing import Generator
 from pathlib import Path
 import datetime
 from selenium import webdriver
@@ -52,7 +53,7 @@ class BrowserFactory:
         raise ValueError(f"Unsupported browser type: '{browser_name}'")
 
 @pytest.fixture(scope="session")
-def browser(selected_browser_name) -> WebDriver:
+def browser(selected_browser_name) -> Generator[WebDriver, None, None]:
 
     # Use the Factory to get the correct browser dynamically
     b = BrowserFactory.get_browser(selected_browser_name)
