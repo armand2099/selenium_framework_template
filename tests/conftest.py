@@ -40,6 +40,7 @@ class BrowserFactory:
 
         if browser_name == "Chrome":
             options = webdriver.ChromeOptions()
+            options.add_argument("--disable-blink-features=AutomationControlled")
             if HEADLESS:
                 options.add_argument("--headless=new")
             return webdriver.Chrome(options=options)
@@ -77,23 +78,27 @@ def browser(selected_browser_name) -> Generator[WebDriver, None, None]:
 
 # Create the session-scoped authentication state
 @pytest.fixture(scope="function")
-def browser_auth(browser: WebDriver):
+def browser_auth(browser: WebDriver) -> Generator[WebDriver, None, None]:
     '''Authenticates and stores authentication state'''
 
     state_file = Path("auth/state.json").resolve()
-    with open(state_file, "r") as f:
-        cookies = json.load(f)
-
-    if state_file.is_file():
-        # Create a temporary context and page to execute login
-        for cookie in cookies:
-            browser.add_cookie(cookie)    
 
     browser.get("https://accounts.google.com/")
 
+    if state_file.is_file():
+        with open(state_file, "r") as f:
+            cookies = json.load(f)
+
+        for cookie in cookies:
+            try:
+                browser.add_cookie(cookie)
+            except Exception as e:
+                print(f"Error adding cookie: {cookie}. Error: {e}")  
+
+    browser.get("https://accounts.google.com/")
     google_acc_page = GoogleAccPage(browser)
 
-    if browser.title() == "Sign in - Google Accounts":
+    if browser.title == "Sign in - Google Accounts":
         google_acc_page.enter_email(creds.EMAIL)
         google_acc_page.click_next_button()
         google_acc_page.enter_password(creds.PASSWORD)

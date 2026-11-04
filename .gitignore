@@ -1,6 +1,7 @@
 # caches
 __pycache__
 .pytest-caches
+components
 
 # Virtual environemnt
 venv
@@ -11,3 +12,5 @@ venv
 #Report files
 reports/screenshots/*.png
 reports/*.html
+
+auth/state.json
