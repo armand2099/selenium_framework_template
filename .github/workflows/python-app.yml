@@ -38,7 +38,7 @@ jobs:
         
     - name: Test with pytest and Chrome
       run: |
-        python3 -m pytest --html=Reports/chrome/report_ch.html --self-contained-html --browser-type=chromium -n 3 -v -s tests -m "not AUTH"
+        python3 -m pytest --html=Reports/chrome/report_ch.html --self-contained-html --browser-type=Chrome -n 3 -v -s tests -m "not AUTH"
    
     - name: Test with pytest and Firefox
       run: |
