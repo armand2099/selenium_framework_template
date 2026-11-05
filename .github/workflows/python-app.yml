@@ -18,7 +18,7 @@ concurrency:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
     - uses: actions/checkout@v6
@@ -64,5 +64,5 @@ jobs:
         if: always()
         run: |
           echo "## 📊 Test Reports" >> $GITHUB_STEP_SUMMARY
-          echo "* 🌐 [Chrome Test Report](https://armand2099.github.io/playwright_framework_template/chrome/report_ch.html)" >> $GITHUB_STEP_SUMMARY
-          echo "* 🌐 [Firefox Test Report](https://armand2099.github.io/playwright_framework_template/firefox/report_ff.html)" >> $GITHUB_STEP_SUMMARY
+          echo "* 🌐 [Chrome Test Report](https://armand2099.github.io/selenium_framework_template/chrome/report_ch.html)" >> $GITHUB_STEP_SUMMARY
+          echo "* 🌐 [Firefox Test Report](https://armand2099.github.io/selenium_framework_template/firefox/report_ff.html)" >> $GITHUB_STEP_SUMMARY
