@@ -56,37 +56,35 @@ class BasePage:
 
         return page_url
 
-    def click_element(self, locator: tuple) -> None:
+    def click_element(self, element: WebElement) -> None:
         '''
         Clicks on an element
         '''
-        element = self.get_element(locator)
+        self.wait.until(EC.element_to_be_clickable(element))
         element.click()
 
-    def fills_element(self, locator: tuple, text: str) -> None:
+    def fills_element(self, element: WebElement, text: str) -> None:
         '''
         Fills an element
         '''
-        element = self.get_element(locator)
         element.send_keys(text)
         if element.get_property("value") == text:
-            print(f"Text | {text} | entered in: {locator[1]}")
+            print(f"Text | {text} | entered in: {element.text}")
         else:
-            print(f"Failed to enter | {text} | in: {locator[1]}")
+            print(f"Failed to enter | {text} | in: {element.text}")
 
     
 
-    def check_element(self, locator: tuple, check: bool = True) -> None:
+    def check_element(self, element: WebElement, check: bool = True) -> None:
         '''
         Checks an element
         '''
-        element = self.get_element(locator)
 
         if not element.is_selected():
             element.click()
-            print(f"Element {locator[1]} cheked")
+            print(f"Element {element.text} cheked")
         else:
-            print(f"Element {locator[1]} is already cheked")
+            print(f"Element {element.text} is already cheked")
 
     def random_wait(self) -> int:
         '''

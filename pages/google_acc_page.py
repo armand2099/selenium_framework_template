@@ -21,20 +21,25 @@ class GoogleAccPage(BasePage):
         self.browser = browser
         #Initialize Login PageLocators class
         self.locators = PageLocators()
+
+        #Page elements
+        self.email =  self.get_element(self.locators.EMAIL)
+        self.next_btn = self.get_element(self.locators.NEXT_BTN)
+        self.password = self.get_element(self.locators.PASSWORD)
         
 
     def enter_email(self, email: str):
         '''
         Fills email textbox
         '''
-        self.browser.find_element(*self.locators.EMAIL).send_keys(email)
+        self.email.send_keys(email)
 
     def enter_password(self, password: str):
         '''
         Fills Password textbox
         '''
-        self.browser.find_element(*self.locators.PASSWORD).send_keys(password)
+        self.password.send_keys(password)
 
     def click_next_button(self):
         #Click next button
-        self.browser.find_element(*self.locators.NEXT_BTN).click()
+        self.next_btn.click()
