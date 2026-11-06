@@ -51,8 +51,6 @@ class BrowserFactory:
 
         if browser_name == "Firefox":
             options = webdriver.FirefoxOptions()
-            temp_profile_dir = tempfile.mkdtemp()
-            options.profile = temp_profile_dir
             if HEADLESS:
                 options.add_argument("--headless")            
             return webdriver.Firefox(options=options)
