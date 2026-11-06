@@ -22,10 +22,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v6
-    - name: Set up Python 3.12.3
+    - name: Set up Python 3.12
       uses: actions/setup-python@v5
       with:
-        python-version: "3.12.3"
+        python-version: "3.12"
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
@@ -38,11 +38,11 @@ jobs:
         
     - name: Test with pytest and Chrome
       run: |
-        python3 -m pytest --html=Reports/chrome/report_ch.html --self-contained-html --browser-type=chromium -n 3 -v -s tests -m "not AUTH"
+        python3 -m pytest --html=Reports/chrome/report_ch.html --self-contained-html --browser-type=Chrome -n 3 -v -s tests -m "not AUTH"
    
     - name: Test with pytest and Firefox
       run: |
-        python3 -m pytest --html=Reports/firefox/report_ff.html --self-contained-html --browser-type=firefox -n 3 -v -s tests -m "not AUTH"
+        python3 -m pytest --html=Reports/firefox/report_ff.html --self-contained-html --browser-type=Firefox -n 3 -v -s tests -m "not AUTH"
     - name: Upload Test Report
       if: always() # Ensures the report is uploaded even if tests fail
       uses: actions/upload-pages-artifact@v3
