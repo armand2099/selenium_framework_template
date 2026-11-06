@@ -51,6 +51,8 @@ class BrowserFactory:
 
         if browser_name == "Firefox":
             options = webdriver.FirefoxOptions()
+            options.set_preference("layers.acceleration.disabled", True)
+            options.set_preference("gfx.webrender.software", True)
             if HEADLESS:
                 options.add_argument("--headless")            
             return webdriver.Firefox(options=options)
