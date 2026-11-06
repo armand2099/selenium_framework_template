@@ -1,9 +1,13 @@
+import tempfile
+
 import pytest
 import os
 import json
 from typing import Generator
 from pathlib import Path
 import datetime
+from requests import options
+from requests import options
 from selenium import webdriver
 from utils.logger import Loggin
 from pages.google_acc_page import GoogleAccPage
@@ -47,6 +51,8 @@ class BrowserFactory:
 
         if browser_name == "Firefox":
             options = webdriver.FirefoxOptions()
+            temp_profile_dir = tempfile.mkdtemp()
+            options.profile = temp_profile_dir
             if HEADLESS:
                 options.add_argument("--headless")            
             return webdriver.Firefox(options=options)

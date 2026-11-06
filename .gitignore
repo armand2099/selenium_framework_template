@@ -11,6 +11,6 @@ venv
 
 #Report files
 reports/screenshots/*.png
-reports/*.html
+reports/
 
 auth/state.json
